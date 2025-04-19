@@ -1,0 +1,22 @@
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    volumes:
+      - ./app:/app
+    command: /bin/bash
+    tty: true
+    stdin_open: true
+    environment:
+      - TERM=xterm-256color
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp:unconfined
+    networks:
+      - dev-network
+
+networks:
+  dev-network:
+    driver: bridge
